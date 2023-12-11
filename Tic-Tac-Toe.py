@@ -1,6 +1,6 @@
 seq_num_move = ("Первый", "Второй", "Третий", "Четвёртый", "Пятый", "Шестой", "Седьмой", "Восьмой", "Девятый")
-filled_columns = []
-filled_rows = []
+possible_moves = (0, 1, 2, 10, 11, 12, 20, 21, 22)
+all_moves = []
 board = [[' ', '0', '1', '2'],
          ['0', '-', '-', '-'],
          ['1', '-', '-', '-'],
@@ -17,29 +17,26 @@ def print_board(desk):
 
 player_X = 'X'
 player_O = 'O'
-win_X = ['X', 'X', 'X']
-win_O = ['O', 'O', 'O']
 
 # preparing for the game
 player = player_X
-num_of_moves = 1
 game_over = False
 
 # start game
-while (not game_over) and (num_of_moves < 10):
-    print(f"{seq_num_move[num_of_moves - 1]} ход")
-    num_of_moves += 1
+while (not game_over) and (len(all_moves) < 9):
+    print(f"{seq_num_move[len(all_moves)]} ход")
     print_board(board)
     if player == player_X:
         print("Ходят крестики")
     else:
         print("Ходят нолики")
     while True:
-        player_row = int(input("Введите номер строки(0,1,2):"))
-        player_column = int(input("Введите номер столбца(0,1,2):"))
-        if ((player_row in range(0, 3)) and (player_row not in filled_rows)) \
-                and ((player_column in range(0, 3)) and (player_column not in filled_columns)):
-            filled_rows.append(player_row)
-            filled_columns.append(player_column)
+        player_row = input("Введите номер строки(0,1,2):")
+        player_column = input("Введите номер столбца(0,1,2):")
+        player_move = int(player_row + player_column)
+        if (player_move in possible_moves) and (player_move not in all_moves):
+            print("Ход защитан")
+            all_moves.append(player_move)
+            break
         else:
-            print(False)
+            print("Ход не защитан")
