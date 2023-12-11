@@ -1,4 +1,2 @@
-r = int(input())
-rt = [2,1]
-if (r in range(0, 3)) and (r not in rt):
-    print(True)
+possible_moves = (0,1,2,10,11,12,20,21,20)
+print(len(possible_moves))
