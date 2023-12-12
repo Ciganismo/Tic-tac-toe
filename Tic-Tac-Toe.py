@@ -34,10 +34,18 @@ while (not game_over) and (len(all_moves) < 9):
         player_row = input("Введите номер строки(0,1,2):")
         player_column = input("Введите номер столбца(0,1,2):")
         player_move = int(player_row + player_column)
+        player_row = int(player_row)
+        player_column = int(player_column)
         if (player_move in possible_moves) and (player_move not in all_moves):
             print("Ход защитан")
             all_moves.append(player_move)
+
+            if player == player_X:
+                board[player_row + 1][player_column + 1] = 'X'
+                player = player_O
+            else:
+                board[player_row + 1][player_column + 1] = 'O'
+                player = player_X
             break
         else:
             print("Ход не защитан")
-
