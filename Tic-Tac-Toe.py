@@ -42,10 +42,68 @@ while (not game_over) and (len(all_moves) < 9):
 
             if player == player_X:
                 board[player_row + 1][player_column + 1] = 'X'
+                for i in board[1:4]:
+                    i = i[1:4]
+                    if i == ['X', 'X', 'X']:
+                        game_over = True
+                        break
+                for i in range(1, 4):
+                    check = []
+                    for stroka in board[1:4]:
+                        check.append(stroka[i])
+                    if check == ["X", "X", "X"]:
+                        game_over = True
+                        break
+                if game_over:
+                    break
+                check = []
+                check2 = []
+                for i in range(1, 4):
+                    stroka = board[i]
+                    check.append(stroka[i])
+                    check2.append(stroka[4 - i])
+                if check == ["X", "X", "X"] or check2 == ["X", "X", "X"]:
+                    game_over = True
+                    break
                 player = player_O
-            else:
+            elif player == player_O:
+                board[player_row + 1][player_column + 1] = 'O'
+                for i in board[1:4]:
+                    i = i[1:4]
+                    if i == ['O', 'O', 'O']:
+                        game_over = True
+                        break
+                for i in range(1, 4):
+                    check = []
+                    for stroka in board[1:4]:
+                        check.append(stroka[i])
+                    if check == ["O", "O", "O"]:
+                        game_over = True
+                        break
+                if game_over:
+                    break
+                check = []
+                check2 = []
+                for i in range(1, 4):
+                    stroka = board[i]
+                    check.append(stroka[i])
+                    check2.append(stroka[4 - i])
+                if check == ["O", "O", "O"] or check2 == ["O", "O", "O"]:
+                    game_over = True
+                    break
+                player = player_X
+        else:
                 board[player_row + 1][player_column + 1] = 'O'
                 player = player_X
-            break
-        else:
-            print("Ход не защитан")
+                
+        break
+    else:
+        print("Ход не защитан")
+print_board(board)
+if game_over:
+    if player == player_X:
+        print("Выиграли крестики")
+    else:
+        print("Выиграли нолики")
+elif len(all_moves) == 9:
+    print("Ничья")
